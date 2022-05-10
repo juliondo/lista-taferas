@@ -1,1 +1,1 @@
-const nomes = ['Thiago pereira',]
+const nomes = ["Thiago pereira", "Júlio"];
