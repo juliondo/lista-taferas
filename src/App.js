@@ -1,27 +1,55 @@
-<<<<<<< HEAD
-import "./App.css";
-import Conversor from "./components/conversor";
-=======
-import './App.css';
-import Conversor from './components/conversor';
->>>>>>> 6dc2723e281d5ceb20bc2d1da820ca875c39a287
+import { useState } from "react";
 
 function App() {
+  const [tarefa, setTarefa] = useState("");
+  const [lista, setLista] = useState([]);
+
+  function newTarefa(e) {
+    setTarefa(e.target.value);
+  }
+
+  function add(e) {
+    e.preventDefault();
+
+    setLista([tarefa, ...lista]);
+
+    setTarefa("");
+  }
+
+  function excluir(index) {
+    const newList = [...lista];
+    newList.splice(index, 1);
+    setLista(newList);
+  }
+
   return (
-    <div className="App">
-<<<<<<< HEAD
-      <h1>Conversor da moeda</h1>
-      <hr />
-      <Conversor M1="Dolar" M2="Real" />
-=======
-      <h1>Conversor de moedas</h1>
-      <Conversor M1="USD" M2="BRL" />
-      <Conversor M1="BRL" M2="USD" />
-      <Conversor M1="BRL" M2="EUR" />
-      <Conversor M1="EUR" M2="BRL" />
-      <Conversor M1="PHP" M2="BRL" />
->>>>>>> 6dc2723e281d5ceb20bc2d1da820ca875c39a287
+    <div className="container">
+      <h1 className="title">Tudo list</h1>
+
+      <form>
+        <input
+          className="taskBox"
+          onChange={(e) => newTarefa(e)}
+          type="text"
+          placeholder="Tarefas..."
+          value={tarefa}
+        />
+        <button className="btn-add" onClick={add}>
+          Adicionar
+        </button>
+      </form>
+      <>
+        {lista.map((item, index) => (
+          <ul className="barraTarefa" key={index}>
+            {item}
+            <button className="btn-delete" onClick={() => excluir(index)}>
+              Deletar
+            </button>
+          </ul>
+        ))}
+      </>
     </div>
   );
 }
+
 export default App;
